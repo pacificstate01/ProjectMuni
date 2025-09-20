@@ -1,0 +1,42 @@
+/* Login.module.css */
+
+/* For the first button */
+.gradientBorder {
+    border: 3px solid transparent;
+    background: 
+      linear-gradient(white, white) padding-box,
+      linear-gradient(to right, #06b6d4, #3b82f6) border-box;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease; /* Add transition */
+  }
+  
+  .gradientBorder:hover {
+    background: 
+      linear-gradient(to right, #06b6d4, #3b82f6) border-box;
+  }
+  
+  /* For the Clave Única button */
+  .claveUnicaButton {
+    border: 3px solid transparent;
+    background: 
+      linear-gradient(white, white) padding-box,
+      linear-gradient(to right, #06b6d4, #3b82f6) border-box;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    transition: all 0.3s ease; /* Add transition */
+  }
+  
+  .claveUnicaButton:hover {
+    background: 
+      linear-gradient(to right, #06b6d4, #3b82f6) border-box;
+  }
+  
+  /* Text color change on hover */
+  .claveUnicaButton:hover span {
+    color: white !important;
+  }
+  
+  .claveUnicaButton:hover svg {
+    stroke: white !important;
+  }
