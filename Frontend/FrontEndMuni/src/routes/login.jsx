@@ -9,7 +9,7 @@ const Login = () => {
               <img
                 src="./images/cnca-top.png"
                 alt="Logo"
-                className="h-8 w-auto"
+                className="h-6 w-auto"
               />
             </div>
             <h1 className="text-3xl font-bold">Sistema Cuenta Cultura</h1>
