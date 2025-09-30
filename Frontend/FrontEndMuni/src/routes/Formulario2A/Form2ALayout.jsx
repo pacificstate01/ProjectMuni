@@ -86,7 +86,7 @@ const Form2ALayout = () => {
                 </div>
               ))}
             </div>
-            <button className="px-4 py-2 bg-blue-500 text-black rounded-md hover:bg-blue-600 transition-colors">
+            <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
               Guardar Borrador
             </button>
           </div>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Formulario2A6 extends Component {
-  render() {
-    return (
-      <div>Formulario2A6</div>
-    )
-  }
+const Formulario2A6 = () => {
+  return (
+    <div>Formulario2A6</div>
+  )
 }
+
+export default Formulario2A6;
