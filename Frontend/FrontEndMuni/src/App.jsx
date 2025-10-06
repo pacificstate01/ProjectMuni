@@ -15,6 +15,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />}/>
+
+
+        
         <Route path='/form2a' element={<Form2ALayout />}>
           <Route index element={<Navigate to="paso1" replace />} />
           <Route path="paso1" element={<Formulario2A1/>} />

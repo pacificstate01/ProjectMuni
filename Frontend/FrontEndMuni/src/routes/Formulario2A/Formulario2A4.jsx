@@ -20,14 +20,46 @@ const Formulario2A4 = () => {
     },
   });
 
+  // State for the validation error message on "Número de cuotas"
+  const [numeroCuotasError, setNumeroCuotasError] = useState("");
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // Allow only numbers or an empty string
     if (value === "" || /^\d*$/.test(value)) {
       setFormData((prev) => ({
         ...prev,
         [name]: value,
       }));
     }
+  };
+
+  const handleNumeroCuotasChange = (e) => {
+    const { value } = e.target;
+
+    // We only want to allow typing numbers and not more than 1 character
+    if ((value === "" || /^\d*$/.test(value)) && value.length <= 1) {
+        setFormData((prev) => ({
+            ...prev,
+            numeroCuotas: value,
+        }));
+
+        // After updating the value, we perform validation
+        if (value === "") {
+            // If the field is empty, there's no error
+            setNumeroCuotasError("");
+        } else {
+            const numValue = parseInt(value, 10);
+            if (numValue < 1 || numValue > 6) {
+                // If the number is out of the 1-6 range, show an error
+                setNumeroCuotasError("Por favor ingrese un número entre 1 y 6.");
+            } else {
+                // If the number is valid, clear the error
+                setNumeroCuotasError("");
+            }
+        }
+    }
+    // If the user tries to type a non-numeric character, the input simply won't change.
   };
 
   const handleProgramaCajaChange = (e) => {
@@ -56,7 +88,7 @@ const Formulario2A4 = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md font-sans">
       <h2 className="text-xl font-bold mb-6 text-center border-b pb-2">
         IV.- DETALLE MONTO Y CUOTA DE LA SUBVENCIÓN:
       </h2>
@@ -73,6 +105,7 @@ const Formulario2A4 = () => {
             </div>
             <input
               type="text"
+              inputMode="numeric"
               name="montoTotal"
               value={formData.montoTotal}
               onChange={handleInputChange}
@@ -89,16 +122,20 @@ const Formulario2A4 = () => {
               </span>
             </div>
             <input
-              type="number"
+              type="text"
+              inputMode="numeric"
               name="numeroCuotas"
               value={formData.numeroCuotas}
-              onChange={handleInputChange}
-              min="1"
-              max="6"
+              onChange={handleNumeroCuotasChange}
               className="w-full h-8 px-2 border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="1-6"
             />
+            {/* Display validation error message */}
+            {numeroCuotasError && (
+              <p className="text-red-500 text-xs mt-1">{numeroCuotasError}</p>
+            )}
           </div>
+
 
           {/* Plazo máximo */}
           <div className="border border-gray-300 rounded-lg p-4 bg-gray-50">
@@ -108,17 +145,21 @@ const Formulario2A4 = () => {
               </span>
             </div>
             <div className="space-y-2 mt-3">
-              {["30 días", "60 días", "90 días"].map((plazo) => (
-                <div key={plazo} className="flex items-center space-x-2">
+              {[
+                "10 días hábiles antes de la siguiente cuota.",
+                "20 días hábiles a partir del término de la ejecución del programa o proyecto (N°7 del Formulario F-2.B).",
+              ].map((plazo) => (
+                <label key={plazo} className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="radio"
                     name="plazoMaximo"
+                    value={plazo}
                     checked={formData.plazoMaximo === plazo}
                     onChange={() => handlePlazoMaximoChange(plazo)}
                     className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                   />
                   <span className="text-gray-600">{plazo}</span>
-                </div>
+                </label>
               ))}
             </div>
           </div>
@@ -136,30 +177,11 @@ const Formulario2A4 = () => {
                 className="flex justify-between items-center border-b border-gray-200 pb-2"
               >
                 <span className="font-medium text-gray-700 capitalize">
-                  {month === "enero"
-                    ? "Enero"
-                    : month === "febrero"
-                    ? "Febrero"
-                    : month === "marzo"
-                    ? "Marzo"
-                    : month === "abril"
-                    ? "Abril"
-                    : month === "mayo"
-                    ? "Mayo"
-                    : month === "junio"
-                    ? "Junio"
-                    : month === "julio"
-                    ? "Julio"
-                    : month === "agosto"
-                    ? "Agosto"
-                    : month === "septiembre"
-                    ? "Septiembre"
-                    : month === "octubre"
-                    ? "Octubre"
-                    : "Noviembre"}
+                  {month}
                 </span>
                 <input
                   type="text"
+                  inputMode="numeric"
                   name={month}
                   value={value}
                   onChange={handleProgramaCajaChange}
@@ -181,14 +203,14 @@ const Formulario2A4 = () => {
       {/* Notes Section */}
       <div className="mt-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
         <p className="text-sm font-semibold mb-2 text-gray-700">NOTAS:</p>
-        <ul className="text-sm space-y-1 text-gray-600">
+        <ul className="text-sm space-y-1 text-gray-600 list-disc list-inside">
           <li>
-            • Si se solicita cuotas definir su distribución según cuadro N°3,
+            Si se solicita cuotas definir su distribución según cuadro N°3,
             Programa de Caja.
           </li>
           <li>
-            • Respecto de subvenciones extraordinarias, la primera cuota no
-            podrá fijarse en el mes de enero.
+            Respecto de subvenciones extraordinarias, la primera cuota no podrá
+            fijarse en el mes de enero.
           </li>
         </ul>
       </div>
@@ -197,3 +219,4 @@ const Formulario2A4 = () => {
 };
 
 export default Formulario2A4;
+
