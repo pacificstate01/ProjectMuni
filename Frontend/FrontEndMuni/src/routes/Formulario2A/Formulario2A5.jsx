@@ -6,6 +6,9 @@ const Formulario2A5 = () => {
     { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
     { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
     { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
+    { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
+    { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
+    { year: '', project: '', financing: '', amount: '', deliveryDate: '', submissionDate: '', website: '', errors: {} },
   ]);
 
   /**
@@ -204,7 +207,7 @@ const Formulario2A5 = () => {
                 {/* Amount */}
                 <td className="border border-gray-300 p-1">
                   <input
-                    type="number"
+                    type="text"
                     value={row.amount}
                     onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
                     className="w-full px-3 py-2 border-0 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
