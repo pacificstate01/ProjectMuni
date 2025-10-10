@@ -25,4 +25,4 @@ export const FormProvider = ({ children }) => {
 
 export const useForm = () => {
   return useContext(FormContext);
-};
+}

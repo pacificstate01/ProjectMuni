@@ -116,16 +116,16 @@ const Formulario2A5 = () => {
   return (
     <div className="w-full mx-auto p-6 bg-white">
       {/* Header */}
-      <h2 className="text-lg font-bold mb-2">
+      <h2 className="text-blue-800 text-lg font-bold mb-2">
         V.- RESEÑA HISTÓRICA DE DESEMPEÑO EN OTROS PROGRAMAS O PROYECTOS
       </h2>
-      <p className="text-sm text-gray-700 mb-6">
+      <p className="text-blue-800 text-sm  mb-6">
         El presente ítem debe reflejar el comportamiento de la organización postulante en los últimos tres años, 
         respecto de otros proyectos.
       </p>
 
       {/* Table */}
-      <div className="overflow-x-auto border border-gray-300 rounded-lg">
+      <div className="text-black overflow-x-auto border border-gray-300 rounded-lg">
         <table className="min-w-full text-sm">
           <thead className="bg-gray-50">
             <tr>
