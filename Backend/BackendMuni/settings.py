@@ -23,12 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 from dotenv import load_dotenv
 
+
+# Load environment variables from .env file
+
 load_dotenv()
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 if not SECRET_KEY:
-    raise ValueError("No DJANGO_SECRET_KEY set")
+    raise ValueError("No DJANGO_SECRET_KEY set in environment variables")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
