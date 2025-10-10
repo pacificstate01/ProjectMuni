@@ -89,7 +89,7 @@ const Formulario2A4 = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-md font-sans">
-      <h2 className="text-xl font-bold mb-6 text-center border-b pb-2">
+      <h2 className="text-blue-800 text-xl font-bold mb-6 text-center border-b pb-2">
         IV.- DETALLE MONTO Y CUOTA DE LA SUBVENCIÓN:
       </h2>
 

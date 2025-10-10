@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Formulario2A6 = () => {
   const [nonResidentInfo, setNonResidentInfo] = useState('');
   const [documents, setDocuments] = useState({
-    doc1: false, doc2: false, doc3: false, doc4: false, doc5: false,
+    doc2: false, doc3: false, doc4: false,
     doc6: false, doc7: false, doc8: false, doc9: false, doc10: false,
     doc11: false, doc12: false, doc13: false, doc14: false, doc15: false
   });
@@ -50,8 +50,8 @@ const Formulario2A6 = () => {
       </div>
 
       {/* Required Documents Table */}
-      <div className="border border-gray-300 rounded-lg overflow-hidden">
-        <h2 className="text-lg font-bold p-4 bg-gray-50 border-b border-gray-300">
+      <div className="text-black border border-gray-300 rounded-lg overflow-hidden">
+        <h2 className="text-blue-800 text-lg font-bold p-4 bg-gray-50 border-b border-gray-300">
           ANTECEDENTES OBLIGATORIOS QUE ADJUNTA:
         </h2>
         
@@ -71,27 +71,6 @@ const Formulario2A6 = () => {
               </tr>
             </thead>
             <tbody>
-              {/* Document 1 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc1}
-                    onChange={() => handleDocumentChange(1)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  1. Formulario F-2 B de Proyecto o Programa, que contenga objetivos, actividades que pretende, plan de desarrollo, personas beneficiadas, resultados esperados, recursos necesarios, desglose de gastos, financiamiento, etc.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
-
               {/* Document 2 */}
               <tr className="hover:bg-gray-50">
                 <td className="border border-gray-300 p-2 text-center">
@@ -146,22 +125,6 @@ const Formulario2A6 = () => {
                 </td>
                 <td className="border border-gray-300 px-4 py-3">
                   4. Documento que acredite domicilio de la organización postulante.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
-
-              {/* Document 5 - Internal */}
-              <tr className="hover:bg-gray-50 bg-blue-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <span className="text-xs text-gray-500 font-medium">Se solicitará internamente</span>
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  5. Certificado que acredite que tanto la Personalidad Jurídica y el Directorio se encuentran vigentes, emitido por el Servicio de Registro Civil e Identificación, cuya fecha de emisión no sea anterior a 60 días a la fecha de presentación del mismo.
                 </td>
                 <td className="border border-gray-300 p-2">
                   <input
