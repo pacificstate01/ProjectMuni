@@ -429,5 +429,5 @@ const Formulario2A6 = () => {
     </div>
   );
 }
-
+////
 export default Formulario2A6;
