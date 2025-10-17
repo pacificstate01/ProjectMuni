@@ -1,5 +1,28 @@
 import styles from '../css/login.module.css';
+import { useState, useEffect, useRef } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const [userrut,setUserrut] = useState('')
+  const [password,setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+  const navigate = useNavigate();
+  
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if(!userrut.trim()){
+      setErrors({userrut: "RUT requerido"})
+      return;
+    }
+    if(!password.trim()){
+      setErrors({ password: "Contraseña requerida" });
+      return;
+    }
+    setErrors({});
+    navigate('/menu');
+  };
+
+
     return (
       <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="max-w-6xl w-full mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
@@ -62,11 +85,14 @@ const Login = () => {
                       RUT <span className="text-red-500">*</span>
                     </label>
                     <input
+                      onChange = {(e) => setUserrut(e.target.value)}
+                      value= {userrut}
                       className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-blue-500 transition-colors"
                       id="username"
                       type="text"
                       placeholder="Ingresa tu RUT"
                     />
+                    {errors.userrut && <p className="text-red-500">RUT requerido</p>}
                   </div>
                   <div className="mb-6">
                     <label
@@ -76,13 +102,18 @@ const Login = () => {
                       Contraseña <span className="text-red-500">*</span>
                     </label>
                     <input
+                      onChange = {(e) => setPassword(e.target.value)}
+                      value = {password}
                       className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-blue-500 transition-colors"
                       id="password"
                       type="password"
                       placeholder="Ingresa tu contraseña"
                     />
+                    {errors.password && <p className="text-red-500">Contraseña requerida</p>}
                   </div>
                   <button
+                    type="button"
+                    onClick = {handleLogin}
                     className={`w-full relative py-2.5 px-5 rounded-lg font-medium group overflow-hidden ${styles.gradientBorder}`}
                   >
                     {/* Gradient fill (hidden initially) */}
