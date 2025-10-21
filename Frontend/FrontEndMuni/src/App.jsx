@@ -13,12 +13,15 @@ import Formulario2A5 from './routes/Formulario2A/Formulario2A5.jsx';
 import Formulario2A6 from './routes/Formulario2A/Formulario2A6.jsx';
 // MAIN MENU
 import MainMenu from './routes/MainMenu/menu.jsx';
+//CUENTA
+import Cuenta from './routes/MainMenu/cuenta.jsx'
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />}/>
         <Route path='/menu' element={<MainMenu />}/>
+        <Route path='/cuenta' element={<Cuenta />}/>
 
         
         <Route path='/form2a' element={<Form2ALayout />}>
