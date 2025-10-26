@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/authContext'; // Import AuthContext
 
 const MainMenu = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth(); // Get user and logout from AuthContext
   
   const handleNavigation = (path) => (e) => {
     e.preventDefault();
     navigate(path);
   };
 
-  const userName = "Usuario"; // Replace with actual user data
+  const handleSalir = (e) => {
+    e.preventDefault();
+    logout(); // Clear user data
+    navigate('/'); // Redirect to login page
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -25,7 +31,7 @@ const MainMenu = () => {
               <h1 className="text-2xl font-bold">Sistema Cuenta Cultura</h1>
             </div>
             <button
-              onClick={handleNavigation('/')}
+              onClick={handleSalir} // Use the new handleSalir function
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors"
             >
               <span>Salir</span>
@@ -45,7 +51,7 @@ const MainMenu = () => {
           {/* Welcome message */}
           <div className="text-center mb-8">
             <p className="text-black text-lg mb-2">
-              Bienvenido, <span className="font-semibold">{userName}</span>
+              Bienvenido, <span className="font-semibold">{user ? `${user.nombre} ${user.apellidos}` : 'Usuario'}</span>
             </p>
             <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Completa tus datos personales, de formación, experiencia laboral y portafolio en "Tu Perfil", 
@@ -58,7 +64,6 @@ const MainMenu = () => {
             
             {/* TU PERFIL Card */}
             <div 
-              
               className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200 hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02] group"
             >
               <div className="flex flex-col items-center text-center">
@@ -78,7 +83,6 @@ const MainMenu = () => {
 
             {/* Concursos Disponibles Card */}
             <div 
-           
               className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02] group"
             >
               <div className="flex flex-col items-center text-center">
@@ -118,8 +122,6 @@ const MainMenu = () => {
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
 

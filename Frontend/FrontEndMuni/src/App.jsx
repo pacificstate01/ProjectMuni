@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate,Outlet } from 'react-router-dom';
-//LOGIN
+import { AuthProvider } from './context/authContext.jsx';
+//LOGIN, REGISTRO
 import Login from './routes/login.jsx';
+import Registro from './routes/register.jsx'
 //FORM2A
 import Form2ALayout from './routes/Formulario2A/Form2ALayout.jsx';
 import Formulario2A1 from './routes/Formulario2A/Formulario2A1.jsx';
@@ -17,24 +19,27 @@ import MainMenu from './routes/MainMenu/menu.jsx';
 import Cuenta from './routes/MainMenu/cuenta.jsx'
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login />}/>
-        <Route path='/menu' element={<MainMenu />}/>
-        <Route path='/cuenta' element={<Cuenta />}/>
+    <AuthProvider> 
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Login />}/>
+          <Route path='/registro' element={<Registro />}/>
+          <Route path='/menu' element={<MainMenu />}/>
+          <Route path='/cuenta' element={<Cuenta />}/>
 
-        
-        <Route path='/form2a' element={<Form2ALayout />}>
-          <Route index element={<Navigate to="paso1" replace />} />
-          <Route path="paso1" element={<Formulario2A1/>} />
-          <Route path="paso2" element={<Formulario2A2 />} />
-          <Route path="paso3" element={<Formulario2A3 />} />
-          <Route path="paso4" element={<Formulario2A4 />} />
-          <Route path="paso5" element={<Formulario2A5 />} />
-          <Route path="paso6" element={<Formulario2A6 />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          
+          <Route path='/form2a' element={<Form2ALayout />}>
+            <Route index element={<Navigate to="paso1" replace />} />
+            <Route path="paso1" element={<Formulario2A1/>} />
+            <Route path="paso2" element={<Formulario2A2 />} />
+            <Route path="paso3" element={<Formulario2A3 />} />
+            <Route path="paso4" element={<Formulario2A4 />} />
+            <Route path="paso5" element={<Formulario2A5 />} />
+            <Route path="paso6" element={<Formulario2A6 />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
