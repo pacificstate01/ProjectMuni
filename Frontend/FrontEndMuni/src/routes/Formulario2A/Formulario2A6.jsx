@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 const Formulario2A6 = () => {
   const [nonResidentInfo, setNonResidentInfo] = useState('');
   const [documents, setDocuments] = useState({
-    doc2: false, doc3: false, doc4: false,
-    doc6: false, doc7: false, doc8: false, doc9: false, doc10: false,
-    doc11: false, doc12: false, doc13: false, doc14: false, doc15: false
+    doc1: null, doc2: null, doc3: null,
+    doc4: null, doc5: null, doc6: null, doc7: null, doc8: null,
+    doc9: null, doc10: null, doc11: null, doc12: null, doc13: null, doc14: null
   });
   const [submissionDate, setSubmissionDate] = useState({
     day: '',
@@ -14,10 +14,10 @@ const Formulario2A6 = () => {
   });
   const [legalRepresentative, setLegalRepresentative] = useState('');
 
-  const handleDocumentChange = (docNumber) => {
+  const handleFileChange = (docNumber, file) => {
     setDocuments(prev => ({
       ...prev,
-      [`doc${docNumber}`]: !prev[`doc${docNumber}`]
+      [`doc${docNumber}`]: file
     }));
   };
 
@@ -26,6 +26,61 @@ const Formulario2A6 = () => {
       ...prev,
       [field]: value
     }));
+  };
+
+  const FileUploadWithLabel = ({ docNumber, label, isOptional = false }) => {
+    const hasFile = documents[`doc${docNumber}`];
+    
+    return (
+      <tr className="hover:bg-gray-50">
+        <td className="border border-gray-300 p-4">
+          <div className="space-y-2 relative">
+            <label className="block">
+              <input
+                className="block w-full text-sm text-gray-500
+                          file:mr-4 file:py-2 file:px-4
+                          file:rounded-full file:border-0
+                          file:text-sm file:font-semibold
+                          file:bg-blue-50 file:text-blue-700
+                          hover:file:bg-blue-100
+                          cursor-pointer"
+                type="file"
+                onChange={(e) => handleFileChange(docNumber, e.target.files[0])}
+              />
+            </label>
+            {hasFile && (
+              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-white">
+                <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+            )}
+            {hasFile && (
+              <p className="text-xs text-green-600 font-medium truncate">
+                {documents[`doc${docNumber}`].name}
+              </p>
+            )}
+            {isOptional && (
+              <p className="text-xs text-gray-500 italic">
+                Opcional
+              </p>
+            )}
+          </div>
+        </td>
+        <td className="border border-gray-300 px-4 py-3">
+          {label}
+          {isOptional && (
+            <span className="text-xs text-gray-500 italic ml-2">(Opcional)</span>
+          )}
+        </td>
+        <td className="border border-gray-300 p-2">
+          <input
+            type="text"
+            className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </td>
+      </tr>
+    );
   };
 
   return (
@@ -59,8 +114,8 @@ const Formulario2A6 = () => {
           <table className="min-w-full text-sm">
             <thead className="bg-gray-50">
               <tr>
-                <th className="border border-gray-300 px-4 py-2 font-semibold text-center w-24">
-                  DOCUMENTO QUE PRESENTA (MARCAR CON X)
+                <th className="border border-gray-300 px-4 py-2 font-semibold text-center">
+                  DOCUMENTO QUE PRESENTA
                 </th>
                 <th className="border border-gray-300 px-4 py-2 font-semibold text-center">
                   CHECK LIST DE DOCUMENTO(S)
@@ -71,273 +126,90 @@ const Formulario2A6 = () => {
               </tr>
             </thead>
             <tbody>
+              {/* Document 1*/}
+              <FileUploadWithLabel
+                docNumber={1}
+                label="1. Fotocopia del RUT de la organización postulante."
+              />
+
               {/* Document 2 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc2}
-                    onChange={() => handleDocumentChange(2)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  2. Fotocopia del RUT de la organización postulante.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={2}
+                label="2. Fotocopia de la Cédula de Identidad del representante legal."
+              />
 
               {/* Document 3 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc3}
-                    onChange={() => handleDocumentChange(3)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  3. Fotocopia de la Cédula de Identidad del representante legal.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={3}
+                label="3. Documento que acredite domicilio de la organización postulante."
+              />
 
-              {/* Document 4 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc4}
-                    onChange={() => handleDocumentChange(4)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  4. Documento que acredite domicilio de la organización postulante.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              {/* Document 14*/}
+              <FileUploadWithLabel
+                docNumber={14}
+                label="4. Certificado que acredite que tanto la Personalidad Jurídica y el Directorio se encuentran vigentes, emitido por el Servicio de Registro Civil e Identificación, cuya fecha de emisión no sea anterior a 60 días a la fecha de presentación del mismo."
+              />
+
+              {/* Document 4*/}
+              <FileUploadWithLabel
+                docNumber={4}
+                label="5. Certificado de inscripción en el Registro de Personas Jurídicas receptoras de fondos públicos, cuya fecha de emisión no sea anterior a 60 días a la fecha de presentación del mismo. (www.registros19662.cl)."
+              />
+
+              {/* Document 5 */}
+              <FileUploadWithLabel
+                docNumber={5}
+                label="6. Documento que acredite haber presentado rendiciones de cuenta o que ésta se encuentra aprobada, según sea el caso, respecto de aquellos proyectos financiados con aportes provenientes de subvención, presupuesto participativo, FONDEVE o cualquier otro aporte municipal."
+              />
 
               {/* Document 6 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc6}
-                    onChange={() => handleDocumentChange(6)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  6. Certificado de inscripción en el Registro de Personas Jurídicas receptoras de fondos públicos, cuya fecha de emisión no sea anterior a 60 días a la fecha de presentación del mismo. (www.registros19662.cl).
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={6}
+                label="7. Constancia de publicación en un sitio electrónico de la rendición de fondos públicos o municipales entregados por subvenciones u otros aportes."
+              />
 
               {/* Document 7 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc7}
-                    onChange={() => handleDocumentChange(7)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  7. Documento que acredite haber presentado rendiciones de cuenta o que ésta se encuentra aprobada, según sea el caso, respecto de aquellos proyectos financiados con aportes provenientes de subvención, presupuesto participativo, FONDEVE o cualquier otro aporte municipal.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={7}
+                label="8. Copia de instrumento bancario o financiero, ya sea libreta de ahorro, cuenta corriente o vista, a nombre de la organización postulante, que contenga el tipo y número de cuenta, y el nombre de la institución bancaria o financiera."
+              />
 
               {/* Document 8 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc8}
-                    onChange={() => handleDocumentChange(8)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  8. Constancia de publicación en un sitio electrónico de la rendición de fondos públicos o municipales entregados por subvenciones u otros aportes.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={8}
+                label="9. Copia de los Estatutos de la organización y sus modificaciones, si las hubiere (salvo organizaciones regidas por la Ley 19.418 y las entidades que hayan acompañado sus estatutos en postulaciones anteriores, y siempre que éstos se mantengan vigentes)."
+              />
 
               {/* Document 9 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc9}
-                    onChange={() => handleDocumentChange(9)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  9. Copia de instrumento bancario o financiero, ya sea libreta de ahorro, cuenta corriente o vista, a nombre de la organización postulante, que contenga el tipo y número de cuenta, y el nombre de la institución bancaria o financiera.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={9}
+                label="10. Tres (3) cotizaciones por ítem de gastos, en que se funde y justifique el cálculo del financiamiento solicitado. Si la solicitud consiste en financiar gasto en prestación de servicios, adjuntar currículum vitae debidamente firmado y certificado de título debidamente registrado y reconocido, si este ha sido obtenido en el extranjero, y si la solicitud consiste en financiar gasto en personal, adjuntar contrato de trabajo, liquidaciones de sueldo y documentos que respalden el pago de las leyes sociales."
+              />
 
               {/* Document 10 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc10}
-                    onChange={() => handleDocumentChange(10)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  10. Copia de los Estatutos de la organización y sus modificaciones, si las hubiere (salvo organizaciones regidas por la Ley 19.418 y las entidades que hayan acompañado sus estatutos en postulaciones anteriores, y siempre que éstos se mantengan vigentes).
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={10}
+                label="11. Listado de los beneficiarios directos del proyecto (Ej.: Registro de Socios)."
+              />
 
               {/* Document 11 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc11}
-                    onChange={() => handleDocumentChange(11)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  11. Tres (3) cotizaciones por ítem de gastos, en que se funde y justifique el cálculo del financiamiento solicitado. Si la solicitud consiste en financiar gasto en prestación de servicios, adjuntar currículum vitae debidamente firmado y certificado de título debidamente registrado y reconocido, si este ha sido obtenido en el extranjero, y si la solicitud consiste en financiar gasto en personal, adjuntar contrato de trabajo, liquidaciones de sueldo y documentos que respalden el pago de las leyes sociales.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={11}
+                label="12. Informes de la Comisión Técnica."
+              />
 
               {/* Document 12 */}
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc12}
-                    onChange={() => handleDocumentChange(12)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  12. Listado de los beneficiarios directos del proyecto (Ej.: Registro de Socios).
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              <FileUploadWithLabel
+                docNumber={12}
+                label="13. Memoria del proyecto o programa."
+                isOptional={true}
+              />
 
-              {/* Document 13 - Internal */}
-              <tr className="hover:bg-gray-50 bg-blue-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <span className="text-xs text-gray-500 font-medium">Se adjuntará internamente, iniciando el proceso</span>
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  13. Informes de la Comisión Técnica.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
-
-              {/* Document 14 - Optional */}
-              <tr className="hover:bg-gray-50 bg-green-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc14}
-                    onChange={() => handleDocumentChange(14)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  14. Memoria del proyecto o programa (opcional).
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
-
-              {/* Document 15 - Optional */}
-              <tr className="hover:bg-gray-50 bg-green-50">
-                <td className="border border-gray-300 p-2 text-center">
-                  <input
-                    type="checkbox"
-                    checked={documents.doc15}
-                    onChange={() => handleDocumentChange(15)}
-                    className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
-                  />
-                </td>
-                <td className="border border-gray-300 px-4 py-3">
-                  15. Antecedentes varios según estime la organización.
-                </td>
-                <td className="border border-gray-300 p-2">
-                  <input
-                    type="text"
-                    className="w-full px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
-                  />
-                </td>
-              </tr>
+              {/* Document 13 */}
+              <FileUploadWithLabel
+                docNumber={13}
+                label="14. Antecedentes varios según estime la organización."
+              />
             </tbody>
           </table>
         </div>
@@ -392,4 +264,5 @@ const Formulario2A6 = () => {
     </div>
   );
 }
+
 export default Formulario2A6;
