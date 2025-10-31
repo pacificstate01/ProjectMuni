@@ -82,7 +82,8 @@ const MainMenu = () => {
             </div>
 
             {/* Concursos Disponibles Card */}
-            <div 
+            <div
+              onClick={handleNavigation('/postulaciones')}
               className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 hover:shadow-lg transition-all cursor-pointer hover:scale-[1.02] group"
             >
               <div className="flex flex-col items-center text-center">

@@ -15,6 +15,8 @@ import Formulario2A5 from './routes/Formulario2A/Formulario2A5.jsx';
 import Formulario2A6 from './routes/Formulario2A/Formulario2A6.jsx';
 // MAIN MENU
 import MainMenu from './routes/MainMenu/menu.jsx';
+// POSTULACIONES
+import ListaPostulaciones from './routes/MainMenu/ListaPostulaciones.jsx';
 //CUENTA
 import Cuenta from './routes/MainMenu/cuenta.jsx'
 function App() {
@@ -26,7 +28,7 @@ function App() {
           <Route path='/registro' element={<Registro />}/>
           <Route path='/menu' element={<MainMenu />}/>
           <Route path='/cuenta' element={<Cuenta />}/>
-
+          <Route path='/postulaciones' element={<ListaPostulaciones/>}/>
           
           <Route path='/form2a' element={<Form2ALayout />}>
             <Route index element={<Navigate to="paso1" replace />} />
